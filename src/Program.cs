@@ -8,6 +8,8 @@ namespace MemeMaker.src
         [STAThread]
         static void Main()
         {
+            string exeDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            Directory.SetCurrentDirectory(exeDirectory);
             dotenv.net.DotEnv.Load();
             TenorGifSearchForm.tenorApiKey = Environment.GetEnvironmentVariable("TENOR_API_KEY");
             if (TenorGifSearchForm.tenorApiKey == "api_key_here" || TenorGifSearchForm.tenorApiKey == null)
