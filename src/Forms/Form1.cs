@@ -12,7 +12,7 @@ namespace MemeMaker
     public partial class Form1 : Form
     {
         TenorGif selectedGif { get; set; }
-        string justify = "left";
+        string justify = "center";
         PrivateFontCollection pfc = new PrivateFontCollection();
         Font captionFont;
         bool boldButtonEnabled = false;
@@ -26,7 +26,7 @@ namespace MemeMaker
             SetColorScheme();
 
             fontComboBox.SelectedIndex = 0;
-            captionFont = new Font(fontComboBox.SelectedText, fontSizeSlider.Value, FontStyle.Regular);
+            captionFont = new Font(fontComboBox.SelectedText, fontSizeSlider.Value, FontStyle.Bold);
             captionText.Font = captionFont;
         }
 
@@ -57,7 +57,7 @@ namespace MemeMaker
             FontFamily stratum2 = pfc.Families[0];
             tenorGifButton.Font = new Font(stratum2, tenorGifButton.Font.Size);
             uploadImageButton.Font = new Font(stratum2, uploadImageButton.Font.Size);
-            boldTextButton.Font = new Font(stratum2, boldTextButton.Font.Size);
+            boldTextButton.Font = new Font(stratum2, boldTextButton.Font.Size, FontStyle.Bold);
             justifyTextButton.Font = new Font(stratum2, justifyTextButton.Font.Size);
             exportGifButton.Font = new Font(stratum2, exportGifButton.Font.Size);
         }

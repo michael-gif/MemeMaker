@@ -134,7 +134,7 @@
             boldTextButton.BackColor = Color.Silver;
             boldTextButton.FlatAppearance.BorderSize = 0;
             boldTextButton.FlatStyle = FlatStyle.Flat;
-            boldTextButton.Font = new Font("Segoe UI", 9.75F);
+            boldTextButton.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             boldTextButton.ForeColor = Color.LightGray;
             boldTextButton.Location = new Point(57, 362);
             boldTextButton.Name = "boldTextButton";
@@ -156,7 +156,7 @@
             justifyTextButton.Name = "justifyTextButton";
             justifyTextButton.Size = new Size(110, 40);
             justifyTextButton.TabIndex = 9;
-            justifyTextButton.Text = "Justify: Left";
+            justifyTextButton.Text = "Justify: Center";
             justifyTextButton.UseCompatibleTextRendering = true;
             justifyTextButton.UseVisualStyleBackColor = false;
             justifyTextButton.Click += justifyTextButton_Click;
@@ -208,7 +208,7 @@
             captionText.Size = new Size(72, 25);
             captionText.TabIndex = 1;
             captionText.Text = "Caption";
-            captionText.TextAlign = ContentAlignment.MiddleLeft;
+            captionText.TextAlign = ContentAlignment.MiddleCenter;
             captionText.Visible = false;
             // 
             // selectedGifPictureBox
