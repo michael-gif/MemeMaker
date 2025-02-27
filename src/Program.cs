@@ -10,7 +10,7 @@ namespace MemeMaker.src
         {
             dotenv.net.DotEnv.Load();
             TenorGifSearchForm.tenorApiKey = Environment.GetEnvironmentVariable("TENOR_API_KEY");
-            if (TenorGifSearchForm.tenorApiKey == null)
+            if (TenorGifSearchForm.tenorApiKey == "api_key_here" || TenorGifSearchForm.tenorApiKey == null)
             {
                 MessageBox.Show("Error, TENOR_API_KEY not found in .env file!", "Tenor API error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
