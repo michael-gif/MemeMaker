@@ -19,7 +19,7 @@ namespace MemeMaker
         public TenorGifSearchForm(Form1 parent)
         {
             InitializeComponent();
-            gifSearchBox.TextChanged += async (s, e) => { await SearchGifs(gifSearchBox.Text); };
+            gifSearchBox.KeyUp += async (s, e) => { if (e.KeyCode == Keys.Enter) await SearchGifs(gifSearchBox.Text); };
             this.parent = parent;
         }
 
