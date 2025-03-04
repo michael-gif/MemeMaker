@@ -30,31 +30,43 @@
         {
             gifSearchBox = new TextBox();
             gifFlowLayoutPanel = new FlowLayoutPanel();
+            gifSearchTextBoxPanel = new Panel();
+            gifSearchTextBoxPanel.SuspendLayout();
             SuspendLayout();
             // 
             // gifSearchBox
             // 
-            gifSearchBox.Location = new Point(12, 12);
+            gifSearchBox.BorderStyle = BorderStyle.None;
+            gifSearchBox.Location = new Point(4, 6);
+            gifSearchBox.Margin = new Padding(3, 6, 3, 3);
             gifSearchBox.Name = "gifSearchBox";
             gifSearchBox.PlaceholderText = "Search tenor gifs";
-            gifSearchBox.Size = new Size(700, 23);
+            gifSearchBox.Size = new Size(693, 16);
             gifSearchBox.TabIndex = 0;
             // 
             // gifFlowLayoutPanel
             // 
             gifFlowLayoutPanel.AutoScroll = true;
-            gifFlowLayoutPanel.Location = new Point(12, 41);
+            gifFlowLayoutPanel.Location = new Point(12, 47);
             gifFlowLayoutPanel.Name = "gifFlowLayoutPanel";
-            gifFlowLayoutPanel.Size = new Size(700, 397);
+            gifFlowLayoutPanel.Size = new Size(700, 391);
             gifFlowLayoutPanel.TabIndex = 1;
+            // 
+            // gifSearchTextBoxPanel
+            // 
+            gifSearchTextBoxPanel.Controls.Add(gifSearchBox);
+            gifSearchTextBoxPanel.Location = new Point(12, 12);
+            gifSearchTextBoxPanel.Name = "gifSearchTextBoxPanel";
+            gifSearchTextBoxPanel.Size = new Size(700, 29);
+            gifSearchTextBoxPanel.TabIndex = 2;
             // 
             // TenorGifSearchForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(720, 450);
+            Controls.Add(gifSearchTextBoxPanel);
             Controls.Add(gifFlowLayoutPanel);
-            Controls.Add(gifSearchBox);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             MinimizeBox = false;
@@ -64,13 +76,15 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "TenorGifSearchForm";
             TopMost = true;
+            gifSearchTextBoxPanel.ResumeLayout(false);
+            gifSearchTextBoxPanel.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
         private TextBox gifSearchBox;
         private FlowLayoutPanel gifFlowLayoutPanel;
+        private Panel gifSearchTextBoxPanel;
     }
 }

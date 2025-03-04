@@ -19,6 +19,10 @@ namespace MemeMaker
         public TenorGifSearchForm(Form1 parent)
         {
             InitializeComponent();
+            this.BackColor = ColorTranslator.FromHtml("#1E1F22");
+            gifSearchTextBoxPanel.BackColor = ColorTranslator.FromHtml("#3F4248");
+            gifSearchBox.BackColor = ColorTranslator.FromHtml("#3F4248");
+            gifSearchBox.ForeColor = Color.White;
             gifSearchBox.KeyUp += async (s, e) => { if (e.KeyCode == Keys.Enter) await SearchGifs(gifSearchBox.Text); };
             this.parent = parent;
         }
