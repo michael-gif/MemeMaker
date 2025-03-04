@@ -74,7 +74,7 @@
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "TenorGifSearchForm";
+            Text = "Tenor - Search for a gif";
             TopMost = true;
             gifSearchTextBoxPanel.ResumeLayout(false);
             gifSearchTextBoxPanel.PerformLayout();
