@@ -57,7 +57,7 @@
             tenorGifButton.FlatStyle = FlatStyle.Flat;
             tenorGifButton.Font = new Font("Segoe UI", 20.25F);
             tenorGifButton.ForeColor = Color.White;
-            tenorGifButton.Location = new Point(6, 7);
+            tenorGifButton.Location = new Point(6, 12);
             tenorGifButton.Name = "tenorGifButton";
             tenorGifButton.Size = new Size(140, 60);
             tenorGifButton.TabIndex = 1;
@@ -73,7 +73,7 @@
             uploadImageButton.FlatStyle = FlatStyle.Flat;
             uploadImageButton.Font = new Font("Segoe UI", 20.25F);
             uploadImageButton.ForeColor = Color.White;
-            uploadImageButton.Location = new Point(152, 7);
+            uploadImageButton.Location = new Point(152, 12);
             uploadImageButton.Name = "uploadImageButton";
             uploadImageButton.Size = new Size(127, 60);
             uploadImageButton.TabIndex = 2;
@@ -87,7 +87,7 @@
             captionTextBox.BackColor = Color.Silver;
             captionTextBox.Enabled = false;
             captionTextBox.ForeColor = Color.Black;
-            captionTextBox.Location = new Point(6, 73);
+            captionTextBox.Location = new Point(6, 78);
             captionTextBox.Multiline = true;
             captionTextBox.Name = "captionTextBox";
             captionTextBox.PlaceholderText = "Enter caption here";
@@ -143,7 +143,9 @@
             boldTextButton.Text = "Bold";
             boldTextButton.UseCompatibleTextRendering = true;
             boldTextButton.UseVisualStyleBackColor = false;
+            boldTextButton.EnabledChanged += boldTextButton_EnabledChanged;
             boldTextButton.Click += boldTextButton_Click;
+            boldTextButton.Paint += Button_Paint;
             // 
             // justifyTextButton
             // 
@@ -159,7 +161,9 @@
             justifyTextButton.Text = "Justify: Center";
             justifyTextButton.UseCompatibleTextRendering = true;
             justifyTextButton.UseVisualStyleBackColor = false;
+            justifyTextButton.EnabledChanged += justifyTextButton_EnabledChanged;
             justifyTextButton.Click += justifyTextButton_Click;
+            justifyTextButton.Paint += Button_Paint;
             // 
             // label4
             // 
@@ -222,23 +226,25 @@
             // 
             // exportGifButton
             // 
+            exportGifButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             exportGifButton.BackColor = Color.Silver;
             exportGifButton.FlatAppearance.BorderSize = 0;
             exportGifButton.FlatStyle = FlatStyle.Flat;
             exportGifButton.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            exportGifButton.ForeColor = Color.LightGray;
-            exportGifButton.Location = new Point(10, 523);
+            exportGifButton.ForeColor = Color.DimGray;
+            exportGifButton.Location = new Point(10, 538);
             exportGifButton.Name = "exportGifButton";
             exportGifButton.Size = new Size(269, 76);
             exportGifButton.TabIndex = 13;
             exportGifButton.Text = "Export GIF";
             exportGifButton.UseCompatibleTextRendering = true;
             exportGifButton.UseVisualStyleBackColor = false;
+            exportGifButton.EnabledChanged += exportGifButton_EnabledChanged;
             exportGifButton.Click += exportGifButton_Click;
+            exportGifButton.Paint += Button_Paint;
             // 
             // panel2
             // 
-            panel2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             panel2.Controls.Add(captionTextBox);
             panel2.Controls.Add(exportGifButton);
             panel2.Controls.Add(tenorGifButton);
@@ -250,9 +256,10 @@
             panel2.Controls.Add(label2);
             panel2.Controls.Add(boldTextButton);
             panel2.Controls.Add(label3);
-            panel2.Location = new Point(770, 12);
+            panel2.Dock = DockStyle.Right;
+            panel2.Location = new Point(770, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(286, 602);
+            panel2.Size = new Size(298, 626);
             panel2.TabIndex = 14;
             // 
             // Form1

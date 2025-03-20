@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Drawing.Text;
 using System.Windows.Forms;
 using System.Security;
+using MemeMaker.src.Forms;
 
 namespace MemeMaker
 {
@@ -15,9 +16,6 @@ namespace MemeMaker
         string justify = "center";
         PrivateFontCollection pfc = new PrivateFontCollection();
         Font captionFont;
-        bool boldButtonEnabled = false;
-        bool justifyButtonEnabled = false;
-        bool exportButtonEnabled = false;
 
         public Form1()
         {
@@ -40,6 +38,10 @@ namespace MemeMaker
             uploadImageButton.BackColor = ColorTranslator.FromHtml("#3F4248");
             panel1.BackColor = ColorTranslator.FromHtml("#2B2D31");
             fontComboBox.BackColor = ColorTranslator.FromHtml("#3F4248");
+
+            boldTextButton.Enabled = false;
+            justifyTextButton.Enabled = false;
+            exportGifButton.Enabled = false;
         }
 
         /// <summary>
@@ -75,17 +77,11 @@ namespace MemeMaker
             captionTextBox.Enabled = true;
             fontComboBox.Enabled = true;
             fontSizeSlider.Enabled = true;
-            boldButtonEnabled = true;
-            justifyButtonEnabled = true;
-            exportButtonEnabled = true;
+            boldTextButton.Enabled = true;
+            justifyTextButton.Enabled = true;
+            exportGifButton.Enabled = true;
 
             captionTextBox.BackColor = Color.White;
-            boldTextButton.BackColor = ColorTranslator.FromHtml("#3F4248");
-            boldTextButton.ForeColor = Color.White;
-            justifyTextButton.BackColor = ColorTranslator.FromHtml("#3F4248");
-            justifyTextButton.ForeColor = Color.White;
-            exportGifButton.BackColor = ColorTranslator.FromHtml("#3F4248");
-            exportGifButton.ForeColor = Color.White;
         }
 
         public void UpdateSelectedGif(TenorGif gif)
@@ -203,8 +199,6 @@ namespace MemeMaker
 
         private void justifyTextButton_Click(object sender, EventArgs e)
         {
-            if (!justifyButtonEnabled) return;
-
             if (justify == "left")
             {
                 justify = "center";
@@ -235,9 +229,7 @@ namespace MemeMaker
 
         private void boldTextButton_Click(object sender, EventArgs e)
         {
-            if (!boldButtonEnabled) return;
-
-            boldTextButton.Font = new Font(DefaultFont, boldTextButton.Font.Bold ? FontStyle.Regular : FontStyle.Bold);
+            boldTextButton.Font = new Font(boldTextButton.Font, boldTextButton.Font.Bold ? FontStyle.Regular : FontStyle.Bold);
             bool isBold = boldTextButton.Font.Bold;
             UpdateCaptionFont(isBold);
             UpdateSelectedGif(selectedGif);
@@ -255,10 +247,8 @@ namespace MemeMaker
             UpdateSelectedGif(selectedGif);
         }
 
-        private void exportGifButton_Click(object sender, EventArgs e)
+        private async void exportGifButton_Click(object sender, EventArgs e)
         {
-            if (!exportButtonEnabled) return;
-
             // Obtain save file path
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
             saveFileDialog1.Filter = "Gif Image|*.gif";
@@ -276,25 +266,8 @@ namespace MemeMaker
                 $"-y \"{outputPath}\""
             };
 
-            // Run ffmpeg command to generate gif
-            ProcessStartInfo psi = new ProcessStartInfo
-            {
-                FileName = "ffmpeg",
-                Arguments = string.Join(" ", arguments),
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                UseShellExecute = false,
-                CreateNoWindow = true
-            };
-            using (Process process = new Process { StartInfo = psi })
-            {
-                process.Start();
-                process.WaitForExit();
-            }
-
-            // Cleanup
-            File.Delete(captionImagePath);
-            MessageBox.Show("Exported gif to: " + outputPath, "Export complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            ExportProgressForm exportProgressForm = new ExportProgressForm(captionImagePath, outputPath, arguments);
+            exportProgressForm.ShowDialog();
         }
 
         private void Form1_SizeChanged(object sender, EventArgs e)
@@ -322,6 +295,48 @@ namespace MemeMaker
             }
 
             UpdateSelectedGif(selectedGif);
+        }
+
+        private void exportGifButton_EnabledChanged(object sender, EventArgs e)
+        {
+            Button currentButton = (Button)sender;
+            exportGifButton.ForeColor = currentButton.Enabled ? Color.White : Color.LightGray;
+            exportGifButton.BackColor = currentButton.Enabled ? ColorTranslator.FromHtml("#3F4248") : Color.Silver;
+        }
+
+        private void boldTextButton_EnabledChanged(object sender, EventArgs e)
+        {
+            Button currentButton = (Button)sender;
+            boldTextButton.ForeColor = currentButton.Enabled ? Color.White : Color.LightGray;
+            boldTextButton.BackColor = currentButton.Enabled ? ColorTranslator.FromHtml("#3F4248") : Color.Silver;
+        }
+
+        private void justifyTextButton_EnabledChanged(object sender, EventArgs e)
+        {
+            Button currentButton = (Button)sender;
+            justifyTextButton.ForeColor = currentButton.Enabled ? Color.White : Color.LightGray;
+            justifyTextButton.BackColor = currentButton.Enabled ? ColorTranslator.FromHtml("#3F4248") : Color.Silver;
+        }
+
+        private void Button_Paint(object sender, PaintEventArgs e)
+        {
+            Button btn = (Button)sender;
+            if (btn.Enabled) return;
+            SolidBrush backColorBrush = new SolidBrush(btn.BackColor);
+            SolidBrush foreColorBrush = new SolidBrush(btn.ForeColor);
+
+            var stringFormat = new StringFormat
+            {
+                Alignment = StringAlignment.Center,
+                LineAlignment = StringAlignment.Center
+            };
+
+            e.Graphics.FillRectangle(backColorBrush, e.ClipRectangle);
+            e.Graphics.DrawString(btn.Text, btn.Font, foreColorBrush, e.ClipRectangle, stringFormat);
+
+            backColorBrush.Dispose();
+            foreColorBrush.Dispose();
+            stringFormat.Dispose();
         }
     }
 }
