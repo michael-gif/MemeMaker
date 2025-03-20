@@ -2,7 +2,7 @@
 Gif captioner that uses Tenor
 
 # Preview
-[Program Preview](https://github.com/michael-gif/MemeMaker/blob/main/resources/program_preview.png)
+![Program Preview](https://github.com/michael-gif/MemeMaker/blob/main/resources/program_preview.png)
 
 # Install
 - Go [here](https://developers.google.com/tenor/guides/quickstart) and get a Tenor API key
